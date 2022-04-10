@@ -27,7 +27,7 @@ class WxRequester:
                 with open('weather.log', mode='a', encoding='utf-8') as log:
                     log.write('{0}  {1}\n'.format(time.strftime('%H:%M:%S %Y-%m-%d'), weather))
 
-                await asyncio.sleep(10)
+                await asyncio.sleep(300)
 
 
 wx = WxRequester()
