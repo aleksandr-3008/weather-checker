@@ -1,0 +1,6 @@
+# created by virtualenv automatically
+weather.log
+pyvenv.cfg
+Scripts
+Lib
+.idea
