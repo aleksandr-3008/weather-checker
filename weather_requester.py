@@ -22,13 +22,19 @@ class WxRequester:
                 await websocket.send(','.join(self.set_of_airports))
 
                 weather = await websocket.recv()
-                time = datetime.datetime.now()
 
-                with open('weather.log', mode='a', encoding='utf-8') as log:
-                    log.write('{0}  {1}\n'.format(time.strftime('%H:%M:%S %Y-%m-%d'), weather))
+                self.logger(weather)
 
-                await asyncio.sleep(10)
+                await asyncio.sleep(300)
+
+    def logger(self, weather):
+
+        time = datetime.datetime.now()
+
+        with open('weather.log', mode='a', encoding='utf-8') as log:
+            log.write('{0}  {1}\n'.format(time.strftime('%H:%M:%S %Y-%m-%d'), weather))
 
 
-wx = WxRequester()
-asyncio.run(wx.requester())
+if __name__ == '__main__':
+    wx = WxRequester()
+    asyncio.run(wx.requester())
