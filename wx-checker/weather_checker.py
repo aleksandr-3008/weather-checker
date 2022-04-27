@@ -1,6 +1,7 @@
 import requests
 import websockets
 import asyncio
+import os
 
 
 class WxChecker:
@@ -12,14 +13,14 @@ class WxChecker:
     on the given aerodromes. It sends back a message with the information about whether aerodromes are suitable
     or not
     """
-    API_HEADER = {'X-API-Key': '783eba700d804544bab9e90f2c'}
-    ARPT_MIN_WX = {'visibility': 800, 'ceiling': 80}
+    API_HEADER = {'X-API-Key': os.getenv('API_KEY')}
+    ARPT_MIN_WX = {'visibility_meters': 800, 'ceiling_meters': 80}
 
     def __init__(self):
         self.weather_report = {}
 
     async def main(self):
-        async with websockets.serve(self._websocket_server, "localhost", 8765, ping_interval=None):
+        async with websockets.serve(self._websocket_server, '127.0.0.1', 8765, ping_interval=None):
             await asyncio.Future()
 
     async def _websocket_server(self, websocket):
@@ -50,7 +51,7 @@ class WxChecker:
                 visibility = 9999
                 ceiling = 9999
 
-            if ceiling < WxChecker.ARPT_MIN_WX['ceiling'] or visibility < WxChecker.ARPT_MIN_WX['visibility']:
+            if ceiling < WxChecker.ARPT_MIN_WX['ceiling_meters'] or visibility < WxChecker.ARPT_MIN_WX['visibility_meters']:
                 self.weather_report[icao_code] = f"Meteorological conditions are poor. This airport is not required " \
                                                  f"as destination or alternative. Visibility is {visibility}, " \
                                                  f"ceiling is {ceiling}"

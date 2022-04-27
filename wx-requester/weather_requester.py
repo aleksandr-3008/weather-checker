@@ -1,6 +1,7 @@
 import asyncio
 import datetime
 import websockets
+import os
 
 
 class WxRequester:
@@ -10,16 +11,23 @@ class WxRequester:
     This class contains aerodromes that are wanted to be updated with current weather information. It also sends
     a ws request to a server which sends back a needed information and logs it into file.
     """
+
     def __init__(self):
-        self.set_of_airports = {'ULLI', 'UUWW', 'USTR'}
-        self.url = "ws://localhost:8765"
+        self.aerodromes_from_env = os.getenv('AERODROMES')
+        self.set_of_aerodromes = {'ULLI', 'UUWW', 'USTR'}
+        self.url = "ws://127.0.0.1:8765"
 
     async def requester(self):
 
+        if self.aerodromes_from_env is None:  # check if user's variable was set
+            pass
+        else:
+            self.aerodromes_from_env = str(self.aerodromes_from_env).strip().upper()
+            self.set_of_aerodromes = set(self.aerodromes_from_env.split(','))
+
         while True:
             async with websockets.connect(self.url) as websocket:
-
-                await websocket.send(','.join(self.set_of_airports))
+                await websocket.send(','.join(self.set_of_aerodromes))
 
                 weather = await websocket.recv()
 

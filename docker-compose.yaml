@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  server:
+    build: wx-checker
+    restart: always
+    environment:
+      - TZ=Europe/Moscow
+      - API_KEY='783eba700d804544bab9e90f2c'
+    ports:
+      - "8765:8765"
+
+  client:
+    build: wx-requester
+    restart: always
+    environment:
+      - TZ=Europe/Moscow
+      - AERODROMES='UUDD, UNKL, URSS'
