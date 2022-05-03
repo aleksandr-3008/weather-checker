@@ -26,13 +26,11 @@ is working.(THIS METHOD DOESN'T WORK YET)
 
 WORKS NOW: 
 
-At first, you should write down your api key from 
-https://api.checkwx.com (API_KRY) and list the ICAO codes of the 
-aerodromes you want (separating with comma) to the 
-AERODROMES row in the .sh (Unix) or .ps1(Windows) file
-in the directory, depending on which system you are using and 
-then run the script. This script will create an API_KEY and an AERODROMES
-variable for yor current session. Secondly, you should run
+At first, you should add your api key from 
+https://api.checkwx.com to your environment as a variable
+(API_KEY=<your api key>) and list the ICAO codes of the 
+aerodromes you want in a string, separating with commas to the 
+AERODROMES variable. Secondly, you should run
 weather_checker.py, which will open the '8765' port.
 Then you ought to run weather_requester.py. You will see all the information in
 the weather.log

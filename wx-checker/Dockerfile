@@ -6,7 +6,7 @@ COPY . .
 
 RUN apt-get update
 
-RUN pip install --no-cache-dir -r requirements.
+RUN pip install --no-cache-dir -r requirements.txt
 
 ENV TZ Europe/Moscow
 

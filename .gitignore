@@ -3,3 +3,4 @@ pyvenv.cfg
 Scripts
 Lib
 .idea
+/.DS_Store

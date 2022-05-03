@@ -15,7 +15,7 @@ class WxRequester:
     def __init__(self):
         self.aerodromes_from_env = os.getenv('AERODROMES')
         self.set_of_aerodromes = {'ULLI', 'UUWW', 'USTR'}
-        self.url = "ws://127.0.0.1:8765"
+        self.url = "ws://0.0.0.0:8765"
 
     async def requester(self):
 
